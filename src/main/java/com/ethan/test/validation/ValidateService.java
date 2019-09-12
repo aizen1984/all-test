@@ -19,6 +19,8 @@ public class ValidateService {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
         TestEntity testEntity = new TestEntity();
+        testEntity.setName("1");
+        testEntity.setSex("2");
         Set<ConstraintViolation<TestEntity>> set = validator.validate(testEntity);
         set.stream().forEach(x -> System.out.println(x.getMessage()));
     }
