@@ -1,6 +1,14 @@
 package com.ethan.test.lamda;
 
 
+import com.ethan.test.lamda.steam.Dish;
+import com.ethan.test.lamda.steam.Dish2;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
@@ -8,12 +16,15 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
+
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.*;
 
 public class LamdaTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Trader raoul = new Trader("Raoul", "Cambridge");
         Trader mario = new Trader("Mario", "Milan");
         Trader alan = new Trader("Alan", "Cambridge");
@@ -84,10 +95,154 @@ public class LamdaTest {
 //                }));
 
 
-        System.out.println(Stream.of(1, 2, 3, 4).reduce(Integer::sum).get());
+//        System.out.println(Stream.of(1, 2, 3, 4).reduce(Integer::sum).get());
+
+//        System.out.println(transactions.stream().flatMap(x -> Stream.of(x.getTrader(), x.getValue())).collect(Collectors.toList()));
+
 
 //        String s = "abcd";
 //        System.out.println(s.charAt(0));
+
+//        String onLine = processFile(br -> br.readLine());
+
+
+        //flatMap
+//        String[] arrays = new String[]{"hello", "world"};
+//        Stream<String> stringStream = Arrays.stream(arrays);
+//        System.out.println(stringStream.map(x -> x.split("")).
+//                flatMap(x -> Arrays.stream(x)).distinct().collect(Collectors.toList()));
+
+//        List<Integer> num1 = Arrays.asList(1, 2, 3);
+//        List<Integer> num2 = Arrays.asList(3, 4);
+//
+//        List<int[]> pairs = num1.stream().flatMap(x -> num2.stream().map(y -> new int[]{x, y})).collect(Collectors.toList());
+//        pairs.stream().forEach(x -> System.out.print(Arrays.toString(x)));
+//        System.out.println(Arrays.toString(new int[]{1, 2}));
+//
+//        num2.stream().allMatch(x -> x == 1);
+//        num1.stream().anyMatch(x -> x == 2);
+//        num1.stream().noneMatch(x -> x == 3);
+//        CollectionUtils.isEmpty(num1);
+//        CollectionUtils.isEmpty(new HashMap<>());
+//        num1.stream().findAny().orElse(1);
+//        //map-reduce 模式
+//        num1.stream().map(x -> 1).distinct().reduce(0, Integer::sum);
+//        num1.stream().min(Comparator.comparing(x -> x));
+//        num1.stream().mapToInt(x -> x).max();
+//
+//        IntStream.rangeClosed(1, 10).forEach(System.out::print);
+//        System.out.println();
+//        IntStream.rangeClosed(1, 100).boxed().flatMap(a ->
+//                IntStream.rangeClosed(a, 100).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0).boxed()
+//                        .map(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)}));
+//
+//        System.out.println(IntStream.rangeClosed(1, 100).boxed().getClass());
+
+
+        List<Dish> menu = Arrays.asList(
+                new Dish(null, false, 800, Dish.Type.MEAT),
+                new Dish("beef", false, 700, Dish.Type.MEAT),
+                new Dish("chicken", false, 400, Dish.Type.MEAT),
+                new Dish("french fries", true, 530, Dish.Type.OTHER),
+                new Dish("rice", true, 350, Dish.Type.OTHER),
+                new Dish("season fruit", true, 120, Dish.Type.OTHER),
+                new Dish("pizza", true, 550, Dish.Type.OTHER),
+                new Dish("prawns", false, 300, Dish.Type.FISH),
+                new Dish("salmon", false, 450, Dish.Type.FISH));
+
+
+        long howManyDish = menu.stream().collect(Collectors.counting());
+        System.out.println("howManyDish->" + howManyDish);
+
+        long howManyDish2 = menu.stream().count();
+        System.out.println("howManyDish2->" + howManyDish);
+
+        Comparator<Dish> dishComparator = comparing(Dish::getCalories);
+        //Comparator<Dish> dishComparator1 = (o1, o2) -> o1.getCalories() - o2.getCalories();
+
+        Optional<Dish> optionalDish = menu.stream().collect(Collectors.maxBy(dishComparator));
+        System.out.println(optionalDish.orElse(new Dish()));
+
+        Optional<Integer> optionalDishCalories = menu.stream()
+                .collect(Collectors.maxBy(dishComparator)).map(x -> x.getCalories());
+        System.out.println(optionalDishCalories.orElse(0));
+
+        IntSummaryStatistics menusIntSummaryStatistics =
+                menu.stream().collect(Collectors.summarizingInt(Dish::getCalories));
+        System.out.println(menusIntSummaryStatistics);
+
+
+        //可以 join
+        System.out.println(menu.stream().map(Dish::getName).
+                filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(",")));
+
+        System.out.println(menu.stream().map(Dish::getCalories).reduce(0, (x, y) -> x + y));
+        System.out.println(menu.stream().filter(t -> t.getCalories() > 0).
+                collect(Collectors.reducing(0, Dish::getCalories, Integer::sum)));
+
+        Map<Dish.Type, List<Dish>> typeListMap = menu.stream().collect(Collectors.groupingBy(Dish::getType));
+        System.out.println(typeListMap);
+
+        Map<String, List<Dish>> typeListMap2 = menu.stream().
+                collect(Collectors.groupingBy(t -> {
+                    if (t.getCalories() > 700) {
+                        return "high";
+                    } else {
+                        return "low";
+                    }
+                }));
+
+        System.out.println(typeListMap2);
+
+        Map<Dish.Type, Map<String, List<Dish>>> typeListMap3 = menu.stream()
+                .collect(Collectors.groupingBy(Dish::getType, Collectors.groupingBy(t -> {
+                    if (t.getCalories() > 700) {
+                        return "high";
+                    } else {
+                        return "low";
+                    }
+                })));
+
+        Map<Dish.Type, Long> typeLongMap = menu.stream().collect(Collectors.groupingBy(Dish::getType,
+                Collectors.counting()));
+
+        Map<Dish.Type, Optional<Dish>> typeOptionalMap = menu.stream()
+                .collect(groupingBy(Dish::getType, maxBy(comparingInt(Dish::getCalories))));
+
+        System.out.println(typeOptionalMap);
+
+
+        Map<Dish.Type, Dish> typeDishMap = menu.stream()
+                .collect(groupingBy(Dish::getType,
+                        collectingAndThen(maxBy(comparingInt(Dish::getCalories)), Optional::get)));
+
+        System.out.println(typeDishMap);
+
+        System.out.println(menu.stream().map(t -> {
+            Dish2 dish2 = new Dish2();
+            dish2.setCalories(t.getCalories());
+            dish2.setName("2" + t.getName());
+            return dish2;
+        }).collect(Collectors.toList()));
+
+//        System.out.println(DoubleStream.iterate(1L,n->n+1).limit(12).reduce(1.1,(a,b)->a*b));
+//        Double aDouble = DoubleStream.iterate(1L, n -> n + 1).limit(12).reduce(1, (a, b) -> {
+//            System.out.print("a->" + a);
+//            System.out.print(" b->" + b);
+//            double result = a * 1.1;
+//            System.out.println(" a*b->" + result);
+//            return result;
+//        });
+//        System.out.println("aDouble-->" + aDouble);
+//
+//        double i = 1;
+//        for (double j = 1; j <= 12; j++) {
+//            System.out.print("j-->"+j);
+//            i = i * 1.1;
+//            System.out.println(" i-->"+ i);
+//        }
+//        System.out.println(i);
+
 
     }
 
@@ -106,4 +261,12 @@ public class LamdaTest {
         }
         return result;
     }
+
+
+    public static String processFile(BufferedReadProcesser bufferedReadProcesser) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("data.txt"));
+        return bufferedReadProcesser.process(bufferedReader);
+    }
+
+
 }

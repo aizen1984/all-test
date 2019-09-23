@@ -1,4 +1,9 @@
 package com.ethan.test.lamda.exampleEntity;
 
-public class Persion {
+public class Person {
+	private Car car;
+
+	public Car getCar() {
+		return car;
+	}
 }

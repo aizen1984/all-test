@@ -1,9 +1,7 @@
 package com.ethan.test.threadLocal;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Stream;
 
 public class TestThreadLocal {
     ThreadLocal<Integer> local = new ThreadLocal() {
