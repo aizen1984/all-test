@@ -244,6 +244,7 @@ public class LamdaTest {
 //        System.out.println(i);
 
 
+        //test
     }
 
     private static boolean check(Integer t, Predicate<Integer> predicate) {
