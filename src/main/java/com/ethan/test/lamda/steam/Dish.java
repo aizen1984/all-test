@@ -3,6 +3,8 @@ package com.ethan.test.lamda.steam;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 //@Data
 @Setter
@@ -46,6 +48,8 @@ public class Dish {
 	public enum Type {
 		MEAT, FISH, OTHER
 	}
+
+
 
 
 }
