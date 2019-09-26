@@ -1,4 +1,4 @@
-package com.ethan.test.defaultMethod;
+package com.ethan.test.javabasic.defaultMethod;
 
 public interface Parent {
 

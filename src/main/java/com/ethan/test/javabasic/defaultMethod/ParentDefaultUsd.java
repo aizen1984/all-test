@@ -1,4 +1,4 @@
-package com.ethan.test.defaultMethod;
+package com.ethan.test.javabasic.defaultMethod;
 
 public class ParentDefaultUsd {
     public static void main(String[] args) {

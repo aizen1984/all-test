@@ -1,4 +1,4 @@
-package com.ethan.test.enumTest;
+package com.ethan.test.javabasic.enumTest;
 
 public enum BankEnum {
 	BOSC("boscService", FundPayWay.SUPER_NET, "上海银行"),

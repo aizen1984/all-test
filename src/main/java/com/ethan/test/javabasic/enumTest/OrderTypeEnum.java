@@ -1,4 +1,4 @@
-package com.ethan.test.enumTest;
+package com.ethan.test.javabasic.enumTest;
 
 public enum OrderTypeEnum {
 	NORMAL("普通订单"),

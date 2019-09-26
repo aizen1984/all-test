@@ -241,13 +241,19 @@ public class LamdaTest {
 //            i = i * 1.1;
 //            System.out.println(" i-->"+ i);
 //        }
-//        System.out.println(i);
-    //3333
-        //44444
-        //55555
+//
 
-        //test
+        Map<Boolean, List<Integer>> listMap = IntStream.rangeClosed(2, 100).boxed().collect(partitioningBy(LamdaTest::prime));
+        System.out.println(listMap.get(true));
+
+        System.out.println(System.currentTimeMillis());
+
     }
+
+    private static boolean prime(int position) {
+        return IntStream.range(2, position).noneMatch(t -> position % t == 0);
+    }
+
 
     private static boolean check(Integer t, Predicate<Integer> predicate) {
         return predicate.test(t);

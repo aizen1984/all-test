@@ -1,4 +1,4 @@
-package com.ethan.test.basic;
+package com.ethan.test.javabasic;
 
 import java.util.LinkedList;
 

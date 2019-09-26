@@ -1,4 +1,4 @@
-package com.ethan.test.basic;
+package com.ethan.test.javabasic;
 
 public class ForLoopTest {
 	public static void main(String[] args) {

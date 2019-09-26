@@ -1,4 +1,4 @@
-package com.ethan.test.transmit;
+package com.ethan.test.javabasic.transmit;
 
 import java.util.HashMap;
 import java.util.Map;
