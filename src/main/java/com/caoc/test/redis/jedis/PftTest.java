@@ -17,15 +17,11 @@ public class PftTest {
 		}
 		jedis.close();
 
-
-
-
 		for (int i = 1000; i < 100000; i += 100) { Experiment exp = new Experiment(i); exp.work();
 			exp.debug();
 		}
 
 	}
-
 
 	static class BitKeeper {
 		private int maxbits;
