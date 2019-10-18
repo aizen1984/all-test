@@ -1,7 +1,5 @@
 package com.caoc.test.thread.thread;
 
-import com.rabbitmq.tools.json.JSONUtil;
-
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
