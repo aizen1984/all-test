@@ -1,4 +1,4 @@
-package com.caoc.test.threadLocal;
+package com.caoc.test.thread.threadLocal;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
