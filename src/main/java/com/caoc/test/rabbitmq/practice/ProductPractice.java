@@ -41,12 +41,12 @@ public class ProductPractice {
 			channel.exchangeDeclare(RabbitMqConfig.EXCHANGE1, "direct", true, false, null);
 			channel.queueDeclare(RabbitMqConfig.QUEUE1, false, false, false, null);
 			channel.queueBind(RabbitMqConfig.QUEUE1, RabbitMqConfig.EXCHANGE1, RabbitMqConfig.ROUTING_KEY1);
-			//普通发送
+			//普通发送 deliverMode 2 为持久
 			/*channel.basicPublish(RabbitMqConfig.EXCHANGE1, RabbitMqConfig.ROUTING_KEY1, true,
 					new AMQP.BasicProperties().builder().deliveryMode(2).priority(1).userId("guest").build()
 					, "normal-hello".getBytes());*/
 			//带有headers信息
-			IntStream.range(1,10).forEach(i->{
+			/*IntStream.range(1, 10).forEach(i -> {
 				Map<String, Object> headers = new HashMap<>();
 				headers.put("location", "here");
 				headers.put("day", "now");
@@ -58,7 +58,20 @@ public class ProductPractice {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			});
+			});*/
+
+			//ttl exchange
+			channel.exchangeDeclare("ttlExchange", "direct", true, false, null);
+			//for queue ttl
+			Map<String, Object> queueArgs = new HashMap<>();
+			queueArgs.put("x-message-ttl", 60000);
+			channel.queueDeclare("ttlQueue", true, false, false, queueArgs);
+			channel.queueBind("ttlQueue", "ttlExchange", "tllRoutingKey");
+			// for message ttl
+			AMQP.BasicProperties.Builder builder2 = new AMQP.BasicProperties.Builder();
+			builder2.expiration("60000");//60000ms
+			AMQP.BasicProperties properties = builder2.build();
+			channel.basicPublish("ttlExchange", "tllRoutingKey", true, properties, "ttl".getBytes());
 
 
 			System.out.println("发送");
