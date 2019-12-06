@@ -1,6 +1,7 @@
 package com.caoc.test;
 
-import com.caoc.test.firststarterdemo.service.PersonService;
+//import com.caoc.test.firststarterdemo.service.PersonService;
+
 import com.caoc.test.validation.ValidateService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @MapperScan("com.caoc.test.mapper")
 public class TestApplication {
-    @Autowired
-    ValidateService validateService;
+	@Autowired
+	ValidateService validateService;
 
-    @Autowired
-    PersonService persionService;
+//    @Autowired
+//    PersonService persionService;
 
 
-    public static void main(String[] args) {
-        SpringApplication.run(TestApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(TestApplication.class, args);
+	}
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test() {
-        //校验
-        //validateService.testValidate();
-        return persionService.getPersonName();
-    }
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		//校验
+		//validateService.testValidate();
+//        return persionService.getPersonName();
+		return null;
+	}
 
 }
