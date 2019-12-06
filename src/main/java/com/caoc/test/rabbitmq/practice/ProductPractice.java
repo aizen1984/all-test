@@ -1,7 +1,10 @@
 package com.caoc.test.rabbitmq.practice;
 
 import com.caoc.test.rabbitmq.RabbitMqConfig;
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 
-public class ProductPractice extends RabbitMqConfig {
+public class ProductPractice {
 
 
 	public static final String IP_ADDRESS = "127.0.0.1";
@@ -43,7 +46,7 @@ public class ProductPractice extends RabbitMqConfig {
 					new AMQP.BasicProperties().builder().deliveryMode(2).priority(1).userId("guest").build()
 					, "normal-hello".getBytes());*/
 			//带有headers信息
-			/*IntStream.range(1,10).forEach(i->{
+			IntStream.range(1,10).forEach(i->{
 				Map<String, Object> headers = new HashMap<>();
 				headers.put("location", "here");
 				headers.put("day", "now");
@@ -55,7 +58,20 @@ public class ProductPractice extends RabbitMqConfig {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			});
+			});*/
+
+			//ttl exchange
+			channel.exchangeDeclare("ttlExchange", "direct", true, false, null);
+			//for queue ttl
+			Map<String, Object> queueArgs = new HashMap<>();
+			queueArgs.put("x-message-ttl", 60000);
+			channel.queueDeclare("ttlQueue", true, false, false, queueArgs);
+			channel.queueBind("ttlQueue", "ttlExchange", "tllRoutingKey");
+			// for message ttl
+			AMQP.BasicProperties.Builder builder2 = new AMQP.BasicProperties.Builder();
+			builder2.expiration("60000");//60000ms
+			AMQP.BasicProperties properties = builder2.build();
+			channel.basicPublish("ttlExchange", "tllRoutingKey", true, properties, "ttl".getBytes());
 
 
 			System.out.println("发送");*/
