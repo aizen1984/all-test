@@ -1,6 +1,5 @@
 package com.caoc.test;
 
-import com.caoc.test.firststarterdemo.service.PersonService;
 import com.caoc.test.validation.ValidateService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ public class TestApplication {
     @Autowired
     ValidateService validateService;
 
-    @Autowired
-    PersonService persionService;
+    //@Autowired
+    //PersonService persionService;
 
 
     public static void main(String[] args) {
@@ -30,7 +29,8 @@ public class TestApplication {
     public String test() {
         //校验
         //validateService.testValidate();
-        return persionService.getPersonName();
+        //return persionService.getPersonName();
+        return "hello46";
     }
 
 }
