@@ -41,12 +41,12 @@ public class ProductPractice {
 			channel.exchangeDeclare(RabbitMqConfig.EXCHANGE1, "direct", true, false, null);
 			channel.queueDeclare(RabbitMqConfig.QUEUE1, false, false, false, null);
 			channel.queueBind(RabbitMqConfig.QUEUE1, RabbitMqConfig.EXCHANGE1, RabbitMqConfig.ROUTING_KEY1);
-			//普通发送 deliverMode 2 为持久
+			//普通发送
 			/*channel.basicPublish(RabbitMqConfig.EXCHANGE1, RabbitMqConfig.ROUTING_KEY1, true,
 					new AMQP.BasicProperties().builder().deliveryMode(2).priority(1).userId("guest").build()
 					, "normal-hello".getBytes());*/
 			//带有headers信息
-			/*IntStream.range(1, 10).forEach(i -> {
+			IntStream.range(1,10).forEach(i->{
 				Map<String, Object> headers = new HashMap<>();
 				headers.put("location", "here");
 				headers.put("day", "now");
@@ -74,7 +74,35 @@ public class ProductPractice {
 			channel.basicPublish("ttlExchange", "tllRoutingKey", true, properties, "ttl".getBytes());
 
 
-			System.out.println("发送");
+			System.out.println("发送");*/
+
+			//没有投递到队列
+			channel.basicPublish(EXCHANGE1, ROUTING_KEY1, true,
+					MessageProperties.PERSISTENT_TEXT_PLAIN, "hello".getBytes());
+			channel.addReturnListener((replyCode, replyText, exchange, routingKey, properties, body) -> {
+				String message = new String(body);
+				System.out.println("Basic.Return返回的结果是" + message);
+			});
+
+			//备用
+			Map<String, Object> map = new HashMap<>();
+			map.put("alternate-exchange", "myAe");
+			channel.exchangeDeclare("normalExchange", "direct", true, false, map);
+			channel.exchangeDeclare("myAe", "fanout", true, false, null);
+			channel.queueDeclare("normalQueue", true, false, false, null);
+			channel.queueBind("normalQueue", "normalExchange", "normalKey");
+			Map<String, Object> queueMap = new HashMap<>();
+			queueMap.put("x-message-ttl", 6000);
+			channel.queueDeclare("unnormalQueue", true, false, false, null);
+			channel.queueBind("unnormalQueue", "myAe", "");
+
+			AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties.Builder();
+			builder.deliveryMode(2);
+			builder.expiration("60000");
+			AMQP.BasicProperties properties = builder.build();
+			channel.basicPublish(EXCHANGE1, ROUTING_KEY1, properties, "hello46".getBytes());
+
+
 			channel.close();
 			connection.close();
 		} catch (IOException e) {

@@ -29,7 +29,7 @@ public class ConsumerPractice {
 			channel.basicQos(6);
 
 			//推模式
-			/*channel.basicConsume(RabbitMqConfig.QUEUE1, false, "consumerTag",
+			channel.basicConsume(RabbitMqConfig.QUEUE1, false, "consumerTag",
 					new DefaultConsumer(channel) {
 						@Override
 						public void handleDelivery(String consumerTag, Envelope envelope,
@@ -44,11 +44,11 @@ public class ConsumerPractice {
 							System.out.println("body->" + new String(body));
 							channel.basicAck(deliverTag, false);
 						}
-					});*/
+					});
 
 
 			//拉模式
-			while (true) {
+			/*while (true) {
 				GetResponse response = channel.basicGet(RabbitMqConfig.QUEUE1, false);
 				if (response == null) {
 					TimeUnit.SECONDS.sleep(1);
@@ -59,15 +59,14 @@ public class ConsumerPractice {
 					channel.basicAck(response.getEnvelope().getDeliveryTag(), false);
 				}
 
-			}
+			}*/
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (TimeoutException e) {
 			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
+		
 
 	}
 
