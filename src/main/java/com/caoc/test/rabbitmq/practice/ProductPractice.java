@@ -58,7 +58,7 @@ public class ProductPractice {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			});*/
+			});
 
 			//ttl exchange
 			channel.exchangeDeclare("ttlExchange", "direct", true, false, null);
@@ -74,15 +74,15 @@ public class ProductPractice {
 			channel.basicPublish("ttlExchange", "tllRoutingKey", true, properties, "ttl".getBytes());
 
 
-			System.out.println("发送");*/
+			System.out.println("发送");
 
 			//没有投递到队列
-			channel.basicPublish(EXCHANGE1, ROUTING_KEY1, true,
-					MessageProperties.PERSISTENT_TEXT_PLAIN, "hello".getBytes());
-			channel.addReturnListener((replyCode, replyText, exchange, routingKey, properties, body) -> {
-				String message = new String(body);
-				System.out.println("Basic.Return返回的结果是" + message);
-			});
+			//channel.basicPublish(EXCHANGE1, ROUTING_KEY1, true,
+			//		MessageProperties.PERSISTENT_TEXT_PLAIN, "hello".getBytes());
+			//channel.addReturnListener((replyCode, replyText, exchange, routingKey, properties, body) -> {
+			//	String message = new String(body);
+			//	System.out.println("Basic.Return返回的结果是" + message);
+			//});
 
 			//备用
 			Map<String, Object> map = new HashMap<>();
@@ -99,8 +99,8 @@ public class ProductPractice {
 			AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties.Builder();
 			builder.deliveryMode(2);
 			builder.expiration("60000");
-			AMQP.BasicProperties properties = builder.build();
-			channel.basicPublish(EXCHANGE1, ROUTING_KEY1, properties, "hello46".getBytes());
+			//AMQP.BasicProperties properties = builder.build();
+			//channel.basicPublish(EXCHANGE1, ROUTING_KEY1, properties, "hello46".getBytes());
 
 
 			channel.close();

@@ -48,14 +48,14 @@ public class LendRouteTest {
 		//确定主排序 以还呗bu为主
 
 		List<AssertBankBo> mainSort = null;
-		mainSort = Optional.ofNullable(mainSort)
-				.orElseThrow(() -> new IllegalArgumentException());
-
-		//剔除 包括无资金的资方和客群禁止期数
-		mainSort.stream().
-				filter(t ->
-						sortedBankList.stream().anyMatch(x -> x.getAssertBank().equals(t.getAssertBank())))
-				.collect(Collectors.toList());
+		//mainSort = Optional.ofNullable(mainSort)
+		//		.orElseThrow(() -> new IllegalArgumentException());
+		//
+		////剔除 包括无资金的资方和客群禁止期数
+		//mainSort.stream().
+		//		filter(t ->
+		//				sortedBankList.stream().anyMatch(x -> x.getAssertBank().equals(t.getAssertBank())))
+		//		.collect(Collectors.toList());
 
 		//当天剩余额度、资方自支持的金额、分期、优惠券信息、卡支持情况
 
@@ -67,6 +67,19 @@ public class LendRouteTest {
 
 
 		//匹配顾虑
+
+
+		System.out.println(System.currentTimeMillis());
+		Set set1 = new HashSet();
+		set1.add(1);
+		set1.add(2);
+		Set set2 = new HashSet();
+		set2.add(2);
+		set2.add(4);
+		set2.add(5);
+
+		set1.retainAll(set2);
+		System.out.println(set1);
 
 
 	}
