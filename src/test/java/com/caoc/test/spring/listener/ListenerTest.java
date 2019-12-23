@@ -14,10 +14,20 @@ public class ListenerTest {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
+
+	@Autowired
+	private DebitAccountEventPublisher publisher;
+
+
 	@Test
 	public void testListener() {
 		NotifyEvent notifyEvent = new NotifyEvent("object", "abc@qq.com", "this is content");
 		webApplicationContext.publishEvent(notifyEvent);
 
+	}
+
+	@Test
+	public void testSpringListener() {
+		publisher.sendMqMsg(new OpenAccountDoneEvent(OpenAccountDoneBo.builder().idCardNo("111").name("222").build()));
 	}
 }
