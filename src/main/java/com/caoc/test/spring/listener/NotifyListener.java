@@ -3,6 +3,9 @@ package com.caoc.test.spring.listener;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author caochen
+ */
 @Component
 public class NotifyListener implements ApplicationListener<NotifyEvent> {
 
