@@ -1,9 +1,6 @@
 package com.caoc.test.spring.listener;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 /**
  * @author caochen
@@ -11,6 +8,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Data
 @Builder
+@AllArgsConstructor
 public class OpenAccountDoneBo {
 	@NonNull
 	private String name;

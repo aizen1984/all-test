@@ -11,6 +11,7 @@ public class OpenAccountDoneEvent extends ExchangeAwareEvent<OpenAccountDoneBo> 
 
 	@Override
 	public Object getBody() {
+		System.out.println("getBody()");
 		return super.getSource().getName();
 	}
 }
