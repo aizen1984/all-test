@@ -38,9 +38,9 @@ public class ProductPractice {
 			channel.basicPublish("source","exKey",null,"extDemo".getBytes());*/
 
 			//发送消息到队列
-			channel.exchangeDeclare(RabbitMqConfig.EXCHANGE1, "direct", true, false, null);
-			channel.queueDeclare(RabbitMqConfig.QUEUE1, false, false, false, null);
-			channel.queueBind(RabbitMqConfig.QUEUE1, RabbitMqConfig.EXCHANGE1, RabbitMqConfig.ROUTING_KEY1);
+			//channel.exchangeDeclare(RabbitMqConfig.EXCHANGE_NAME, "direct", true, false, null);
+			//channel.queueDeclare(RabbitMqConfig.QUEUE_NAME_2, false, false, false, null);
+			//channel.queueBind(RabbitMqConfig.QUEUE_NAME_2, RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.ROUTING_KEY);
 			//普通发送
 			/*channel.basicPublish(RabbitMqConfig.EXCHANGE1, RabbitMqConfig.ROUTING_KEY1, true,
 					new AMQP.BasicProperties().builder().deliveryMode(2).priority(1).userId("guest").build()
@@ -51,7 +51,7 @@ public class ProductPractice {
 				headers.put("location", "here");
 				headers.put("day", "now");
 				try {
-					channel.basicPublish(RabbitMqConfig.EXCHANGE1, RabbitMqConfig.ROUTING_KEY1,
+					channel.basicPublish(RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.ROUTING_KEY,
 							new AMQP.BasicProperties().builder().deliveryMode(2).headers(headers)
 									//.expiration("6000")
 									.build(), "withHeaders".getBytes());

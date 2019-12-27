@@ -29,7 +29,7 @@ public class ConsumerPractice {
 			channel.basicQos(6);
 
 			//推模式
-			channel.basicConsume(RabbitMqConfig.QUEUE1, false, "consumerTag",
+			channel.basicConsume(RabbitMqConfig.QUEUE_NAME_2, false, "consumerTag",
 					new DefaultConsumer(channel) {
 						@Override
 						public void handleDelivery(String consumerTag, Envelope envelope,

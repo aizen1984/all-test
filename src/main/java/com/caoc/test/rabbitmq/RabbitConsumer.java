@@ -37,6 +37,7 @@ public class RabbitConsumer {
 						throws IOException {
 					System.out.println("recv message-->" + new String(body));
 					channel.basicAck(envelope.getDeliveryTag(), false);
+
 //					super.handleDelivery(consumerTag, envelope, properties, body);
 				}
 			};

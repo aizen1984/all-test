@@ -42,7 +42,7 @@ public class RabbitProducer {
 			String message = "hello world";
 			channel.basicPublish(EXCHANGE_NAME, "queue-1", MessageProperties.TEXT_PLAIN, message.getBytes());
 			i++;
-			while (i < 500) {
+			while (i < 1000) {
 				message = "hello world:" + i;
 				channel.basicPublish(EXCHANGE_NAME, "queue-1", MessageProperties.TEXT_PLAIN, message.getBytes());
 				i++;
