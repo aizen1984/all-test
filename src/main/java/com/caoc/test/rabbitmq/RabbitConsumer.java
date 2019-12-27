@@ -6,11 +6,15 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * @author caochen
+ */
 public class RabbitConsumer {
-	public static final String EXCHANGE_NAME = "exchange_demo";
+	public static final String EXCHANGE_NAME = "test_all_exchange_fanout_1";
 	public static final String ROUTING_KEY = "routing_key_demo";
-	public static final String QUEUE_NAME = "queue_demo";
-	public static final String IP_ADDRESS = "127.0.0.1";
+	public static final String QUEUE_NAME = "queue_demo_1";
+	public static final String QUEUE_NAME_2 = "queue_demo_2";
+	public static final String IP_ADDRESS = "106.15.59.97";
 	public static final int PORT = 5672;
 
 	public static void main(String[] args) {
@@ -18,8 +22,8 @@ public class RabbitConsumer {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(IP_ADDRESS);
 		factory.setPort(PORT);
-		factory.setUsername("guest");
-		factory.setPassword("guest");
+		factory.setUsername("admin");
+		factory.setPassword("admin123");
 
 		try {
 			final Connection connection = factory.newConnection(addresses);
@@ -32,22 +36,11 @@ public class RabbitConsumer {
 				                           AMQP.BasicProperties properties, byte[] body)
 						throws IOException {
 					System.out.println("recv message-->" + new String(body));
-					try {
-						TimeUnit.SECONDS.sleep(1);
-
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					channel.basicAck(envelope.getDeliveryTag(), false);
 //					super.handleDelivery(consumerTag, envelope, properties, body);
 				}
 			};
-			channel.basicConsume(QUEUE_NAME, consumer);
-			try {
-				TimeUnit.SECONDS.sleep(5);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			channel.basicConsume(QUEUE_NAME_2, consumer);
 
 		} catch (IOException e) {
 			e.printStackTrace();
