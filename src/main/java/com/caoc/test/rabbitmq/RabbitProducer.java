@@ -33,11 +33,11 @@ public class RabbitProducer {
 		try {
 			connection = factory.newConnection();
 			channel = connection.createChannel();
-			channel.exchangeDeclare(EXCHANGE_NAME, "fanout", true, false, null);
-			channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-			channel.queueDeclare(QUEUE_NAME_2, true, false, false, null);
-			channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
-			channel.queueBind(QUEUE_NAME_2, EXCHANGE_NAME, ROUTING_KEY);
+//			channel.exchangeDeclare(EXCHANGE_NAME, "fanout", true, false, null);
+//			channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+//			channel.queueDeclare(QUEUE_NAME_2, true, false, false, null);
+//			channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
+//			channel.queueBind(QUEUE_NAME_2, EXCHANGE_NAME, ROUTING_KEY);
 			int i = 1;
 			String message = "hello world";
 			channel.basicPublish(EXCHANGE_NAME, "queue-1", MessageProperties.TEXT_PLAIN, message.getBytes());
