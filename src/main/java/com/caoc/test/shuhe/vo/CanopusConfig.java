@@ -1,6 +1,7 @@
 package com.caoc.test.shuhe.vo;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,40 +52,38 @@ public class CanopusConfig {
 
 		System.out.println(list.size());
 
-		OpenAccountCardConfig.SupportInfo supportInfo = new OpenAccountCardConfig.SupportInfo();
-
+		OpenAccountSupportCard.SupportInfo supportInfo = new OpenAccountSupportCard.SupportInfo();
 		supportInfo.setOpenFlag(true);
 		supportInfo.setSupportList(list);
 		supportInfo.setUnSupportList(new ArrayList<>());
 
 
-		OpenAccountCardConfig.SupportInfo unSupportInfo = new OpenAccountCardConfig.SupportInfo();
-
+		OpenAccountSupportCard.SupportInfo unSupportInfo = new OpenAccountSupportCard.SupportInfo();
 		unSupportInfo.setOpenFlag(true);
 		unSupportInfo.setSupportList(new ArrayList<>());
 		unSupportInfo.setUnSupportList(new ArrayList<>());
 
-		Map<String, OpenAccountCardConfig.SupportInfo> supportMap = new HashMap<>();
+
+		Map<String, OpenAccountSupportCard.SupportInfo> supportMap = new HashMap<>();
 		supportMap.put("CREDIT", unSupportInfo);
 		supportMap.put("DEBIT", supportInfo);
 
 
-		OpenAccountCardConfig baixin = new OpenAccountCardConfig();
-		baixin.setSupportInfoMap(supportMap);
-
-		OpenAccountCardConfig weizhong = new OpenAccountCardConfig();
-		weizhong.setSupportInfoMap(supportMap);
+		OpenAccountSupportCard baixin = new OpenAccountSupportCard();
+		baixin.setSupportInfo(supportMap);
 
 
-		Map<String, List<String>> unSupportMap2 = new HashMap<>(16);
-		unSupportMap2.put("CREDIT", new ArrayList<>());
-		unSupportMap2.put("DEBIT", new ArrayList<>());
+		OpenAccountSupportCard weizhong = new OpenAccountSupportCard();
+		weizhong.setSupportInfo(supportMap);
 
 
-		Map<String, OpenAccountCardConfig> map = new HashMap<>();
-		map.put("BXBANK", baixin);
-		map.put("WEBANK", weizhong);
-		System.out.println(JSON.toJSONString(map));
+		Map<String, OpenAccountSupportCard> openAccountSupportCardHashMap = new HashMap<>();
+		openAccountSupportCardHashMap.put("BXBANK", baixin);
+		openAccountSupportCardHashMap.put("WEBANK", weizhong);
+		System.out.println(JSON.toJSONString(openAccountSupportCardHashMap, SerializerFeature.DisableCircularReferenceDetect));
+
+		System.out.println(JSON.toJSON(baixin));
+
 
 	}
 }
