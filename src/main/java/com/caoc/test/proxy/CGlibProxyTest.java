@@ -7,7 +7,14 @@ import org.springframework.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
-public class CGlibProxy implements MethodInterceptor {
+public class CGlibProxyTest implements MethodInterceptor {
+
+
+	private static CGlibProxyTest instance = new CGlibProxyTest();
+
+	public static CGlibProxyTest getInstance() {
+		return instance;
+	}
 
 
 	public <T> T getProxy(Class<T> cls) {
@@ -32,9 +39,9 @@ public class CGlibProxy implements MethodInterceptor {
 	}
 
 	public static void main(String[] args) {
-		CGlibProxy cGlibProxy = new CGlibProxy();
-		Hello helloProxy = cGlibProxy.getProxy(HelloImpl.class);
-		helloProxy.sayHello("what");
+		CGlibProxyTest cGlibProxyTest = CGlibProxyTest.getInstance();
+		Hello cglibProxy = cGlibProxyTest.getProxy(HelloImpl.class);
+		cglibProxy.sayHello("what");
 	}
 
 }

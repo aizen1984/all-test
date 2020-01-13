@@ -6,6 +6,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+/**
+ * jdk 动态代理
+ */
 public class DynamicProxy implements InvocationHandler {
 
 	private Object target;
@@ -27,7 +30,6 @@ public class DynamicProxy implements InvocationHandler {
 				target.getClass().getInterfaces(), this);
 	}
 
-
 	private void after() {
 		System.out.println("after￿￿￿￿");
 	}
@@ -40,13 +42,8 @@ public class DynamicProxy implements InvocationHandler {
 	public static void main(String[] args) {
 		Hello hello = new HelloImpl();
 		DynamicProxy proxy = new DynamicProxy(hello);
-
-		Hello helloProxy = (Hello) Proxy.newProxyInstance(hello.getClass().getClassLoader(),
-				hello.getClass().getInterfaces(), proxy);
-
-		Hello helloProxy2 = proxy.getProxy();
-
-		helloProxy.sayHello("caoc");
+		Hello helloProxy = proxy.getProxy();
+		helloProxy.sayHello("dynamicProxy");
 	}
 
 

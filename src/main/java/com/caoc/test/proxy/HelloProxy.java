@@ -10,9 +10,9 @@ public class HelloProxy implements Hello {
 
 	@Override
 	public void sayHello(String name) {
-		before();
+//		before();
 		hello.sayHello(name);
-		after();
+//		after();
 	}
 
 	private void after() {
