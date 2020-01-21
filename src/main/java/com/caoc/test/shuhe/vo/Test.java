@@ -9,6 +9,34 @@ import org.apache.commons.collections.MapUtils;
  */
 public class Test {
 	public static void main(String[] args) {
+		testAccType();
+	}
+
+	public static void testAccType() {
+		String json = "{\n" +
+				"\t\"head\": {\n" +
+				"\t\t\"code\": 200,\n" +
+				"\t\t\"desc\": \"成功\",\n" +
+				"\t\t\"success\": true\n" +
+				"\t},\n" +
+				"\t\"messageBody\": \"{\\\"retMessage\\\":\\\"成功\\\",\\\"retResult\\\":{\\\"linkedBankCode\\\":\\\"102100099996\\\",\\\"acctStatus\\\":\\\"A\\\",\\\"openCardTime\\\":\\\"20200114 17:15:22\\\",\\\"linkedBankName\\\":\\\"中国工商银行\\\",\\\"linkedAcctNo\\\":\\\"6215***58\\\",\\\"combAcctNo\\\":\\\"6772afa0-1bda-4e9e-80d7-90c4d834bfc4\\\",\\\"customerId\\\":\\\"100038494660\\\",\\\"combAcctChildType\\\":\\\"XD001\\\",\\\"acctName\\\":\\\"张涛\\\",\\\"cardNo\\\":\\\"6236***78\\\",\\\"acctLevel\\\":\\\"03\\\",\\\"combAcctType\\\":\\\"XD\\\"},\\\"retCode\\\":\\\"00000000\\\",\\\"isSuccess\\\":\\\"S\\\"}\"\n" +
+				"}";
+		GateWayMessageResponse gateWayMessageResponse = JSON.parseObject(json, GateWayMessageResponse.class);
+//		System.out.println(gateWayMessageResponse.getHead());
+//		JSONObject jsonObject = JSON.parseObject(gateWayMessageResponse.getMessageBody());
+//		if (MapUtils.isNotEmpty(jsonObject)) {
+//			JSONObject jsonObject1 = jsonObject.getJSONObject("retResult");
+//			//02 二类户 03 三类户
+//			String accType = jsonObject1.getString("accType");
+//			System.out.println(accType);
+//
+//		}
+		BxCallResp resp = JSON.parseObject(gateWayMessageResponse.getMessageBody(), BxCallResp.class);
+		System.out.println(JSON.toJSON(resp));
+	}
+
+
+	public static void testEnum() {
 		String code = "";
 		System.out.println(BxAccountTypeEnum.getAccountTypeByTypeCode(code));
 		TestReq req = new TestReq();
@@ -30,21 +58,6 @@ public class Test {
 		req.setBank(DebitAccountChannel.WEBANK);
 
 		System.out.println(JSON.toJSONString(req));
-	}
-
-	public static void testAccType(){
-		String json = "{\"head\":{\"code\":200,\"desc\":\"成功\",\"success\":true},\"messageBody\":\"{\\\"retMessage\\\":\\\"成功\\\",\\\"retResult\\\":{\\\"linkedBankCode\\\":\\\"103100000026\\\",\\\"acctStatus\\\":\\\"A\\\",\\\"openCardTime\\\":\\\"20200113 08:50:22\\\",\\\"linkedBankName\\\":\\\"中国农业银行股份有限公司\\\",\\\"linkedAcctNo\\\":\\\"6228***79\\\",\\\"combAcctNo\\\":\\\"7c4e097c-3d50-40df-91cd-dc748ed153a2\\\",\\\"customerId\\\":\\\"100033953458\\\",\\\"combAcctChildType\\\":\\\"XD001\\\",\\\"acctName\\\":\\\"付孝怀\\\",\\\"cardNo\\\":\\\"6236***85\\\",\\\"acctLevel\\\":\\\"03\\\",\\\"combAcctType\\\":\\\"XD\\\"},\\\"retCode\\\":\\\"00000000\\\",\\\"isSuccess\\\":\\\"S\\\"}\"}";
-		GateWayMessageResponse gateWayMessageResponse = JSON.parseObject(json, GateWayMessageResponse.class);
-		System.out.println(gateWayMessageResponse.getHead());
-		JSONObject jsonObject = JSON.parseObject(gateWayMessageResponse.getMessageBody());
-		if (MapUtils.isNotEmpty(jsonObject)) {
-			JSONObject jsonObject1 = jsonObject.getJSONObject("retResult");
-			//02 二类户 03 三类户
-			String accType = jsonObject1.getString("accType");
-			System.out.println(accType);
-
-		}
-		System.out.println(gateWayMessageResponse.getMessageBody());
 	}
 
 
