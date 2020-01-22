@@ -2,7 +2,6 @@ package com.caoc.test.spring.factoryBean;
 
 import org.springframework.stereotype.Service;
 
-@Service
 public class FactoryBeanServiceImpl implements FactoryBeanService {
 	@Override
 	public void testFactoryBean() {
