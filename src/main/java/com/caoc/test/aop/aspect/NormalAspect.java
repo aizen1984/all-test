@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 @Aspect
 @Component
-public class LogAspects {
+public class NormalAspect {
 
 	@Pointcut("execution(public * com.caoc.test.aop.domain.MathCalculator.*(..))")
 	private void pointCut() {
@@ -23,7 +23,7 @@ public class LogAspects {
 				+ ">>>" + Arrays.toString(joinPoint.getArgs()));
 	}
 
-	@After(value = "com.caoc.test.aop.aspect.LogAspects.pointCut()")
+	@After(value = "com.caoc.test.aop.aspect.NormalAspect.pointCut()")
 	public void logEnd(JoinPoint joinPoint) {
 		System.out.println("logEnd >>>" + joinPoint.getSignature().getName()
 				+ ">>>" + Arrays.toString(joinPoint.getArgs()));
