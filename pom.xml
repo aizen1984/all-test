@@ -31,6 +31,12 @@
             <version>${boot.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot </groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>${boot.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -116,11 +122,11 @@
         <!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
         <!--            <version>2.0.1</version>-->
         <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>cglib</groupId>-->
-<!--            <artifactId>cglib</artifactId>-->
-<!--            <version>2.2.2</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>cglib</groupId>-->
+        <!--            <artifactId>cglib</artifactId>-->
+        <!--            <version>2.2.2</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>io.springfox</groupId>
@@ -138,6 +144,12 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
