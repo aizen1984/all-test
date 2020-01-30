@@ -20,10 +20,6 @@ public class AnnotationBeanDefinitionDemo {
 
 	}
 
-
-
-
-
 	@Configuration
 	public static class config {
 		@Bean(name = {"user1,user2"})

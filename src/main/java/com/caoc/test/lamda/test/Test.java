@@ -103,5 +103,43 @@ public class Test {
 		return result;
 	}
 
+	static class Singleton {
+
+		private static Singleton instance;
+
+		public static Singleton getInstance() {
+			if (instance == null) {
+				synchronized (Singleton.class) {      //1
+					Singleton inst = instance;         //2
+					if (inst == null) {
+						synchronized (Singleton.class) {  //3
+							inst = new Singleton();        //4
+						}
+						instance = inst;                 //5
+					}
+				}
+			}
+			return instance;
+		}
+
+
+		public static Singleton getInstance2() {
+			if (instance == null) {
+				synchronized (Singleton.class) {      //1
+					Singleton inst = instance;         //2
+					if (inst == null) {
+						synchronized (Singleton.class) {  //3
+							//inst = new Singleton();      //4
+							instance = new Singleton();
+						}
+						//instance = inst;               //5
+					}
+				}
+			}
+			return instance;
+		}
+
+	}
+
 
 }
