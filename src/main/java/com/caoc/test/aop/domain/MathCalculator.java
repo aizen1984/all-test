@@ -4,7 +4,7 @@ import com.caoc.test.aop.annotation.MyAop;
 import com.caoc.test.aop.req.CalReq;
 
 public class MathCalculator {
-    @MyAop
+	@MyAop
 	public int div(int i, int j) {
 		System.out.println("MathCalculator >> div");
 		return i / j;

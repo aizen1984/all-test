@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TypeAspect {
 
-	@Before("execution(public * com.caoc.test.aop..*(TypeAspect+,..))" + "&& args(needAspectType,..)")
+	@Before("execution(public * com.caoc.test.aop..*(com.caoc.test.aop.domain.NeedAspectType+,..))"
+			+ "&& args(needAspectType,..)")
 	public void doValidateUid(NeedAspectType needAspectType) {
 		System.out.println("TypeAspect >>>" + needAspectType.getClass());
 	}
