@@ -8,9 +8,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class AnnotationAspect {
-
-	@Around(
-			"@annotation(com.caoc.test.aop.annotation.MyAop)" +
+	/**
+	 *  单独的 within不可
+	 *  单独的 annotation可以
+	 * @param pjp
+	 * @return
+	 * @throws Throwable
+	 */
+	@Around("@annotation(com.caoc.test.aop.annotation.MyAop)" +
 					" ||@within(com.caoc.test.aop.annotation.MyAop)")
 	public Object annotationTest(ProceedingJoinPoint pjp) throws Throwable {
 		System.out.println("AnnotationAspect>>>" + pjp.toString());

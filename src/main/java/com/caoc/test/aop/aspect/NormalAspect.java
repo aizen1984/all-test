@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+/**
+ * 拦截MathCalculator所有的方法
+ */
 @Aspect
 @Component
 public class NormalAspect {
