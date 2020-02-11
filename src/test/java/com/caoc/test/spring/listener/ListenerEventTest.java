@@ -9,7 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ListenerTest {
+public class ListenerEventTest {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
