@@ -18,23 +18,23 @@ import static java.util.stream.Collectors.*;
 
 public class LamdaTest {
 
-    public static void main(String[] args) throws IOException {
-        Trader raoul = new Trader("Raoul", "Cambridge");
-        Trader mario = new Trader("Mario", "Milan");
-        Trader alan = new Trader("Alan", "Cambridge");
-        Trader brian = new Trader("Brian", "Cambridge");
+	public static void main(String[] args) throws IOException {
+		Trader raoul = new Trader("Raoul", "Cambridge");
+		Trader mario = new Trader("Mario", "Milan");
+		Trader alan = new Trader("Alan", "Cambridge");
+		Trader brian = new Trader("Brian", "Cambridge");
 
-        List<Transaction> transactions = Arrays.asList(
-                new Transaction(brian, 2011, 300),
-                new Transaction(raoul, 2012, 1000),
-                new Transaction(raoul, 2011, 400),
-                new Transaction(mario, 2012, 710),
-                new Transaction(mario, 2012, 700),
-                new Transaction(alan, 2012, 950)
-        );
+		List<Transaction> transactions = Arrays.asList(
+				new Transaction(brian, 2011, 300),
+				new Transaction(raoul, 2012, 1000),
+				new Transaction(raoul, 2011, 400),
+				new Transaction(mario, 2012, 710),
+				new Transaction(mario, 2012, 700),
+				new Transaction(alan, 2012, 950)
+		);
 
 
-        //找出2011年发生的所有交易，并按交易额排序
+		//找出2011年发生的所有交易，并按交易额排序
 //        System.out.println(transactions.stream().filter(x -> x.getYear() > 2011)
 //                .sorted((t1, t2) -> t2.getValue() - t1.getValue()
 //                ).collect(Collectors.toList()));
@@ -46,16 +46,16 @@ public class LamdaTest {
 //        System.out.println(transactions.stream().filter(x -> x.getTrader().getCity().equals("Cambridge"))
 //                .sorted(Comparator.comparing(t -> t.getTrader().getName())).collect(Collectors.toList()));
 
-        //返回所有交易员的姓名字符串，并按字母顺序排序
+		//返回所有交易员的姓名字符串，并按字母顺序排序
 
 
-        //有没有交易员在米兰工作的？
+		//有没有交易员在米兰工作的？
 
-        //打印生活在剑桥的交易员的所有交易额
+		//打印生活在剑桥的交易员的所有交易额
 
-        //所有交易中，最高的交易额是多少
+		//所有交易中，最高的交易额是多少
 
-        //找到交易额最小的交易
+		//找到交易额最小的交易
 
 //        ThreadLocal<DateFormat> threadLocal = ThreadLocal.withInitial(() -> DateFormat.getDateTimeInstance());
 //        System.out.println(threadLocal.get().format(new Date()));
@@ -100,7 +100,7 @@ public class LamdaTest {
 //        String onLine = processFile(br -> br.readLine());
 
 
-        //flatMap
+		//flatMap
 //        String[] arrays = new String[]{"hello", "world"};
 //        Stream<String> stringStream = Arrays.stream(arrays);
 //        System.out.println(stringStream.map(x -> x.split("")).
@@ -133,91 +133,91 @@ public class LamdaTest {
 //        System.out.println(IntStream.rangeClosed(1, 100).boxed().getClass());
 
 
-        List<Dish> menu = Arrays.asList(
-                new Dish(null, false, 800, Dish.Type.MEAT),
-                new Dish("beef", false, 700, Dish.Type.MEAT),
-                new Dish("chicken", false, 400, Dish.Type.MEAT),
-                new Dish("french fries", true, 530, Dish.Type.OTHER),
-                new Dish("rice", true, 350, Dish.Type.OTHER),
-                new Dish("season fruit", true, 120, Dish.Type.OTHER),
-                new Dish("pizza", true, 550, Dish.Type.OTHER),
-                new Dish("prawns", false, 300, Dish.Type.FISH),
-                new Dish("salmon", false, 450, Dish.Type.FISH));
-
-
-        long howManyDish = menu.stream().collect(Collectors.counting());
-        System.out.println("howManyDish->" + howManyDish);
-
-        long howManyDish2 = menu.stream().count();
-        System.out.println("howManyDish2->" + howManyDish);
-
-        Comparator<Dish> dishComparator = comparing(Dish::getCalories);
-        //Comparator<Dish> dishComparator1 = (o1, o2) -> o1.getCalories() - o2.getCalories();
-
-        Optional<Dish> optionalDish = menu.stream().collect(Collectors.maxBy(dishComparator));
-        System.out.println(optionalDish.orElse(new Dish()));
-
-        Optional<Integer> optionalDishCalories = menu.stream()
-                .collect(Collectors.maxBy(dishComparator)).map(x -> x.getCalories());
-        System.out.println(optionalDishCalories.orElse(0));
-
-        IntSummaryStatistics menusIntSummaryStatistics =
-                menu.stream().collect(Collectors.summarizingInt(Dish::getCalories));
-        System.out.println(menusIntSummaryStatistics);
-
-
-        //可以 join
-        System.out.println(menu.stream().map(Dish::getName).
-                filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(",")));
-
-        System.out.println(menu.stream().map(Dish::getCalories).reduce(0, (x, y) -> x + y));
-        System.out.println(menu.stream().filter(t -> t.getCalories() > 0).
-                collect(Collectors.reducing(0, Dish::getCalories, Integer::sum)));
-
-        Map<Dish.Type, List<Dish>> typeListMap = menu.stream().collect(Collectors.groupingBy(Dish::getType));
-        System.out.println(typeListMap);
-
-        Map<String, List<Dish>> typeListMap2 = menu.stream().
-                collect(Collectors.groupingBy(t -> {
-                    if (t.getCalories() > 700) {
-                        return "high";
-                    } else {
-                        return "low";
-                    }
-                }));
-
-        System.out.println(typeListMap2);
-
-        Map<Dish.Type, Map<String, List<Dish>>> typeListMap3 = menu.stream()
-                .collect(Collectors.groupingBy(Dish::getType, Collectors.groupingBy(t -> {
-                    if (t.getCalories() > 700) {
-                        return "high";
-                    } else {
-                        return "low";
-                    }
-                })));
-
-        Map<Dish.Type, Long> typeLongMap = menu.stream().collect(Collectors.groupingBy(Dish::getType,
-                Collectors.counting()));
-
-        Map<Dish.Type, Optional<Dish>> typeOptionalMap = menu.stream()
-                .collect(groupingBy(Dish::getType, maxBy(comparingInt(Dish::getCalories))));
-
-        System.out.println(typeOptionalMap);
-
-
-        Map<Dish.Type, Dish> typeDishMap = menu.stream()
-                .collect(groupingBy(Dish::getType,
-                        collectingAndThen(maxBy(comparingInt(Dish::getCalories)), Optional::get)));
-
-        System.out.println(typeDishMap);
-
-        System.out.println(menu.stream().map(t -> {
-            Dish2 dish2 = new Dish2();
-            dish2.setCalories(t.getCalories());
-            dish2.setName("2" + t.getName());
-            return dish2;
-        }).collect(Collectors.toList()));
+//        List<Dish> menu = Arrays.asList(
+//                new Dish(null, false, 800, Dish.Type.MEAT),
+//                new Dish("beef", false, 700, Dish.Type.MEAT),
+//                new Dish("chicken", false, 400, Dish.Type.MEAT),
+//                new Dish("french fries", true, 530, Dish.Type.OTHER),
+//                new Dish("rice", true, 350, Dish.Type.OTHER),
+//                new Dish("season fruit", true, 120, Dish.Type.OTHER),
+//                new Dish("pizza", true, 550, Dish.Type.OTHER),
+//                new Dish("prawns", false, 300, Dish.Type.FISH),
+//                new Dish("salmon", false, 450, Dish.Type.FISH));
+//
+//
+//        long howManyDish = menu.stream().collect(Collectors.counting());
+//        System.out.println("howManyDish->" + howManyDish);
+//
+//        long howManyDish2 = menu.stream().count();
+//        System.out.println("howManyDish2->" + howManyDish);
+//
+//        Comparator<Dish> dishComparator = comparing(Dish::getCalories);
+//        //Comparator<Dish> dishComparator1 = (o1, o2) -> o1.getCalories() - o2.getCalories();
+//
+//        Optional<Dish> optionalDish = menu.stream().collect(Collectors.maxBy(dishComparator));
+//        System.out.println(optionalDish.orElse(new Dish()));
+//
+//        Optional<Integer> optionalDishCalories = menu.stream()
+//                .collect(Collectors.maxBy(dishComparator)).map(x -> x.getCalories());
+//        System.out.println(optionalDishCalories.orElse(0));
+//
+//        IntSummaryStatistics menusIntSummaryStatistics =
+//                menu.stream().collect(Collectors.summarizingInt(Dish::getCalories));
+//        System.out.println(menusIntSummaryStatistics);
+//
+//
+//        //可以 join
+//        System.out.println(menu.stream().map(Dish::getName).
+//                filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(",")));
+//
+//        System.out.println(menu.stream().map(Dish::getCalories).reduce(0, (x, y) -> x + y));
+//        System.out.println(menu.stream().filter(t -> t.getCalories() > 0).
+//                collect(Collectors.reducing(0, Dish::getCalories, Integer::sum)));
+//
+//        Map<Dish.Type, List<Dish>> typeListMap = menu.stream().collect(Collectors.groupingBy(Dish::getType));
+//        System.out.println(typeListMap);
+//
+//        Map<String, List<Dish>> typeListMap2 = menu.stream().
+//                collect(Collectors.groupingBy(t -> {
+//                    if (t.getCalories() > 700) {
+//                        return "high";
+//                    } else {
+//                        return "low";
+//                    }
+//                }));
+//
+//        System.out.println(typeListMap2);
+//
+//        Map<Dish.Type, Map<String, List<Dish>>> typeListMap3 = menu.stream()
+//                .collect(Collectors.groupingBy(Dish::getType, Collectors.groupingBy(t -> {
+//                    if (t.getCalories() > 700) {
+//                        return "high";
+//                    } else {
+//                        return "low";
+//                    }
+//                })));
+//
+//        Map<Dish.Type, Long> typeLongMap = menu.stream().collect(Collectors.groupingBy(Dish::getType,
+//                Collectors.counting()));
+//
+//        Map<Dish.Type, Optional<Dish>> typeOptionalMap = menu.stream()
+//                .collect(groupingBy(Dish::getType, maxBy(comparingInt(Dish::getCalories))));
+//
+//        System.out.println(typeOptionalMap);
+//
+//
+//        Map<Dish.Type, Dish> typeDishMap = menu.stream()
+//                .collect(groupingBy(Dish::getType,
+//                        collectingAndThen(maxBy(comparingInt(Dish::getCalories)), Optional::get)));
+//
+//        System.out.println(typeDishMap);
+//
+//        System.out.println(menu.stream().map(t -> {
+//            Dish2 dish2 = new Dish2();
+//            dish2.setCalories(t.getCalories());
+//            dish2.setName("2" + t.getName());
+//            return dish2;
+//        }).collect(Collectors.toList()));
 
 //        System.out.println(DoubleStream.iterate(1L,n->n+1).limit(12).reduce(1.1,(a,b)->a*b));
 //        Double aDouble = DoubleStream.iterate(1L, n -> n + 1).limit(12).reduce(1, (a, b) -> {
@@ -237,39 +237,50 @@ public class LamdaTest {
 //        }
 //
 
-        Map<Boolean, List<Integer>> listMap = IntStream.rangeClosed(2, 100).boxed().collect(partitioningBy(LamdaTest::prime));
-        System.out.println(listMap.get(true));
-
-        System.out.println(System.currentTimeMillis());
-
-    }
-
-    private static boolean prime(int position) {
-        return IntStream.range(2, position).noneMatch(t -> position % t == 0);
-    }
+//        Map<Boolean, List<Integer>> listMap = IntStream.rangeClosed(2, 100).boxed().collect(partitioningBy(LamdaTest::prime));
+//        System.out.println(listMap.get(true));
+//
+//        System.out.println(System.currentTimeMillis());
 
 
-    private static boolean check(Integer t, Predicate<Integer> predicate) {
-        return predicate.test(t);
-    }
+		List<Integer> list = new ArrayList();
+		list.add(1);
+		list.add(2);
+		Integer i = list.stream().filter(ii -> ii.equals(3)).findFirst().orElseGet(() -> null);
+		if (i == null) {
+			System.out.println("异常");
+		}
+		System.out.println(i);
 
 
-    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-        List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, (o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+	}
 
-        Map<K, V> result = new LinkedHashMap<>();
-        for (Map.Entry<K, V> entry : list) {
-            result.put(entry.getKey(), entry.getValue());
-        }
-        return result;
-    }
+	private static boolean prime(int position) {
+		return IntStream.range(2, position).noneMatch(t -> position % t == 0);
+	}
 
 
-    public static String processFile(BufferedReadProcesser bufferedReadProcesser) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("data.txt"));
-        return bufferedReadProcesser.process(bufferedReader);
-    }
+	private static boolean check(Integer t, Predicate<Integer> predicate) {
+		return predicate.test(t);
+	}
+
+
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
+		Collections.sort(list, (o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+
+		Map<K, V> result = new LinkedHashMap<>();
+		for (Map.Entry<K, V> entry : list) {
+			result.put(entry.getKey(), entry.getValue());
+		}
+		return result;
+	}
+
+
+	public static String processFile(BufferedReadProcesser bufferedReadProcesser) throws IOException {
+		BufferedReader bufferedReader = new BufferedReader(new FileReader("data.txt"));
+		return bufferedReadProcesser.process(bufferedReader);
+	}
 
 
 }
