@@ -39,12 +39,6 @@ public class DynamicProxy implements InvocationHandler {
 	}
 
 
-	public static void main(String[] args) {
-		Hello hello = new HelloImpl();
-		DynamicProxy proxy = new DynamicProxy(hello);
-		Hello helloProxy = proxy.getProxy();
-		helloProxy.sayHello("dynamicProxy");
-	}
 
 
 }

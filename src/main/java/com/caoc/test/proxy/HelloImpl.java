@@ -8,4 +8,9 @@ public class HelloImpl implements Hello  {
 	public void sayHello(String name) {
 		System.out.println("Hello" + name);
 	}
+
+	@Override
+	public void sayHello2(String name) {
+		System.out.println("Hello2" + name);
+	}
 }
