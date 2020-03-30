@@ -41,7 +41,7 @@ public class RabbitConsumer {
 //					super.handleDelivery(consumerTag, envelope, properties, body);
 				}
 			};
-			channel.basicConsume(QUEUE_NAME_2, consumer);
+			channel.basicConsume(QUEUE_NAME, consumer);
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -22,13 +22,6 @@ public class AnnotatedBeanDefinitionParsingDemo {
 		BeanDefinitionReaderUtils.registerWithGeneratedName(builder.getBeanDefinition(), beanFactory);
 
 		beanFactory.getBeansOfType(User.class);
-
-
-
-
-
-
-
 	}
 
 	@Data
