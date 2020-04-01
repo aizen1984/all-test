@@ -12,7 +12,7 @@ public class CopyOnWriteListTest {
 	}
 
 	public static void test() {
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 10; i++) {
 			list.add("string" + i);
 		}
 //		System.out.println(list.size());
