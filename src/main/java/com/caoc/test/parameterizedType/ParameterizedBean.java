@@ -1,49 +1,27 @@
 package com.caoc.test.parameterizedType;
 
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.commons.lang3.reflect.MethodUtils;
-
-import java.lang.reflect.*;
-import java.sql.SQLOutput;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class ParameterizedBean extends ParentFields {
+public class ParameterizedBean {
 	List<String> list1;
 	List list2;
 	Map<String, Long> map1;
 	Map map2;
 	Map.Entry<Long, Short> map3;
 
-	private void test() {
-		System.out.println("test");
-	}
 
-	public void test1() {
-		System.out.println("test1");
-	}
-
-	private String test2() {
-		System.out.println("test2");
-		return "test2";
-	}
-
-
-	public static void main(String[] args) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+	public static void main(String[] args) {
 		Field[] fields = ParameterizedBean.class.getDeclaredFields();
-		Field[] fields1 = FieldUtils.getAllFields(ParameterizedBean.class);
-		//		Arrays.stream(fields).forEach(field -> {
-		//					System.out.println(field.getName() + ":" + (field.getGenericType() instanceof ParameterizedType));
-		//					System.out.println(field.getGenericType().getClass());
-		//				}
-		//		);
-		Object object = ParameterizedBean.class.newInstance();
-		MethodUtils.invokeExactMethod(object, "test1");
-
-		Method method = ParameterizedBean.class.getDeclaredMethod("test");
-		method.setAccessible(true);
-		method.invoke(object, null);
+//		Arrays.stream(fields).forEach(field -> {
+//					System.out.println(field.getName() + ":" + (field.getGenericType() instanceof ParameterizedType));
+//					System.out.println(field.getGenericType().getClass());
+//				}
+//		);
 
 		for (Field f : fields) {
 			if (f.getGenericType() instanceof ParameterizedType) {
@@ -57,7 +35,7 @@ public class ParameterizedBean extends ParentFields {
 				}
 
 
-				//				System.out.println(parameterizedType.getClass());
+//				System.out.println(parameterizedType.getClass());
 				Type[] types = parameterizedType.getActualTypeArguments();
 				for (Type t : types) {
 					System.out.println("类型" + t.getTypeName());
