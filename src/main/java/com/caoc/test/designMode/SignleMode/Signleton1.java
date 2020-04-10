@@ -15,4 +15,6 @@ public class Signleton1 {
 		}
 		return instance;
 	}
+
+
 }
