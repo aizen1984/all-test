@@ -1,4 +1,4 @@
-package com.caoc.test.designMode.SignleMode;
+package com.caoc.test.designMode.signleMode;
 
 import lombok.NoArgsConstructor;
 
