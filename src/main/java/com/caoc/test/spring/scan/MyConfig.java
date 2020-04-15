@@ -7,7 +7,8 @@ import com.caoc.test.validation.ValidateService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.stereotype.Controller;
+
 
 @Configuration // 告诉Spring这是一个配置类
 @ComponentScan(value = "com.caoc.test", includeFilters = {

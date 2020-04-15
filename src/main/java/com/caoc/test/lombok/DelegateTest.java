@@ -21,7 +21,6 @@ public class DelegateTest {
 
 	@RequiredArgsConstructor
 	@Getter
-	@Builder
 	public static class ProcessParameter {
 
 		/* 流水线的执行参数 */
