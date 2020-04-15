@@ -3,10 +3,7 @@ package com.caoc.test.lombok;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Delegate;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
