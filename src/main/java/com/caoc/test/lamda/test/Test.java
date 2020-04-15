@@ -82,13 +82,15 @@ public class Test {
 //		list.stream().distinct().collect(Collectors.toList());
 //
 //		stages.stream().distinct().collect(Collectors.toList());
-		List<String> list = new ArrayList<>();
-		list.add("ZYB");
-		System.out.println(JSON.toJSONString(list));
+//		List<String> list = new ArrayList<>();
+//		list.add("ZYB");
+//		System.out.println(JSON.toJSONString(list));
+//
+//		Map<String, Boolean> map = new HashMap<>();
+//		map.put("userSafeProcessFlag", false);
+//		System.out.println(JSON.toJSONString(map));
 
-		Map<String, Boolean> map = new HashMap<>();
-		map.put("userSafeProcessFlag", false);
-		System.out.println(JSON.toJSONString(map));
+		System.out.printf("%4d%4s%4s\n",1, "2", "3");
 
 
 	}
