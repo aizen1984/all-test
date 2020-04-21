@@ -2,6 +2,7 @@ package com.caoc.test.shuhe.vo;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import org.apache.commons.collections.MapUtils;
 
 /**
@@ -9,7 +10,8 @@ import org.apache.commons.collections.MapUtils;
  */
 public class Test {
 	public static void main(String[] args) {
-		testAccType();
+//		testAccType();
+		System.out.println(new Feature[0]);
 	}
 
 	public static void testAccType() {

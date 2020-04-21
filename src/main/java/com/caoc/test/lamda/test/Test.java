@@ -1,7 +1,9 @@
 package com.caoc.test.lamda.test;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -90,8 +92,20 @@ public class Test {
 //		map.put("userSafeProcessFlag", false);
 //		System.out.println(JSON.toJSONString(map));
 
-		System.out.printf("%4d%4s%4s\n",1, "2", "3");
+//		System.out.printf("%4d%4s%4s\n",1, "2", "3");
 
+
+		System.out.println(8994 / 100);
+		System.out.println(8994 / 100.0);
+		System.out.println(new BigDecimal(8994).divide(new BigDecimal(100), 2,BigDecimal.ROUND_UNNECESSARY));
+
+		List<String> list = new ArrayList<>();
+		list.add("1");
+		list.add("2");
+		list.add(null);
+		System.out.println(list);
+		list.removeIf(x -> StringUtils.isEmpty(x));
+		System.out.println(list);
 
 	}
 
