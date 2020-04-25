@@ -4,6 +4,7 @@ import com.caoc.test.goodException.constant.enums.ResponseEnum;
 import com.caoc.test.goodException.exceptions.BusinessException;
 import com.caoc.test.validation.ValidateService;
 //import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 @RestController
-//@MapperScan("com.caoc.test.mapper")
+@MapperScan("com.caoc.test.mapper")
 public class TestApplication {
     @Autowired
     ValidateService validateService;

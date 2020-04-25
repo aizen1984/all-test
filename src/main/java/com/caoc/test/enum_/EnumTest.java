@@ -9,11 +9,12 @@ public class EnumTest {
 		System.out.println(AssetTypeEnum.valueOf("HEAVY"));
 		System.out.println(AssetTypeEnum.HEAVY.name());
 
-		AssetTypeEnum assetTypeEnum = AssetTypeEnum.HEAVY;
-		System.out.println(Optional.ofNullable(assetTypeEnum.name()).orElse("1"));
+		AssetTypeEnum assetTypeEnum = AssetTypeEnum.valueOf("1");
+//		System.out.println(Optional.ofNullable(assetTypeEnum.name()).orElse("1"));
+		System.out.println(assetTypeEnum);
 
 
-		System.out.println(new AssetTypeEnum[0]);
+
 
 	}
 
