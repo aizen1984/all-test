@@ -185,7 +185,7 @@ public interface TLendApplyMapper {
 
 	List<String> findReBuildLendApply(@Param("begin") String begin, @Param("end") String end);
 
-	int updateBatchPayOffByOrderNo(List<TLendApply> list);
+	int updateBatchPayOffByOrderByIds(List<Integer> list);
 
 	int insertBatchPayOffSelective(List<TLendApply> list);
 

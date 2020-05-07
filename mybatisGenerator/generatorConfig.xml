@@ -27,8 +27,8 @@
         <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/loan"-->
         <!--userId="root" password="">-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/all-test?characterEncoding=utf8"
-                        userId="root" password="root">
+                        connectionURL="jdbc:mysql://106.15.59.97/test?characterEncoding=utf8"
+                        userId="root" password="123456">
         </jdbcConnection>
 
 
@@ -92,7 +92,7 @@
         </javaClientGenerator>
         <!--<table tableName="bank_pipeline_process" delimitIdentifiers="true" delimitAllColumns="true"></table>-->
         <!--<table tableName="t_lend_trans" delimitIdentifiers="true"  delimitAllColumns="true"></table>-->
-        <table tableName="t_apply_info" delimitIdentifiers="true" delimitAllColumns="true"></table>
+        <table tableName="cas_f_lendengine_light_asset_data_from_loan_temp" delimitIdentifiers="true" delimitAllColumns="true"></table>
         <!--<table tableName="channel_card" delimitIdentifiers="true" delimitAllColumns="true"></table>-->
         <!--<table tableName="credit_info" delimitIdentifiers="true" delimitAllColumns="true"></table>-->
         <!--<table tableName="deduct_detail" delimitIdentifiers="true" delimitAllColumns="true"></table>-->

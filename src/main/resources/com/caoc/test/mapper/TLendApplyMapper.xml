@@ -638,6 +638,7 @@
             </if>
         </set>
         where `id` = #{id,jdbcType=INTEGER}
+
     </update>
 
     <select id="findReBuildLendApply" resultType="java.lang.String">
@@ -649,11 +650,11 @@
   </select>
 
 
-    <update id="updateBatchPayOffByOrderNo" parameterType="java.util.List">
+    <update id="updateBatchPayOffByOrderByIds" parameterType="java.util.List">
         update t_lend_apply set apply_status= 'payoff'
         where order_no in
         <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-            #{item.orderNo,jdbcType=VARCHAR}
+            #{item,jdbcType=BIGINT}
         </foreach>
     </update>
 
@@ -697,7 +698,6 @@
 
     <select id="selectBatchForPayOffByOrderNos" parameterType="java.util.List" resultMap="BaseResultMap">
         select
-
         <include refid="Base_Column_List"/>
         from t_lend_apply
         where order_no in
