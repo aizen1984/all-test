@@ -4,6 +4,7 @@ package com.caoc.test.lamda;
 import com.caoc.test.lamda.steam.Dish;
 import com.caoc.test.lamda.steam.Dish2;
 import org.springframework.util.StringUtils;
+import org.testng.collections.Lists;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,19 +20,36 @@ import static java.util.stream.Collectors.*;
 public class LamdaTest {
 
 	public static void main(String[] args) throws IOException {
-		Trader raoul = new Trader("Raoul", "Cambridge");
-		Trader mario = new Trader("Mario", "Milan");
-		Trader alan = new Trader("Alan", "Cambridge");
-		Trader brian = new Trader("Brian", "Cambridge");
 
-		List<Transaction> transactions = Arrays.asList(
-				new Transaction(brian, 2011, 300),
-				new Transaction(raoul, 2012, 1000),
-				new Transaction(raoul, 2011, 400),
-				new Transaction(mario, 2012, 710),
-				new Transaction(mario, 2012, 700),
-				new Transaction(alan, 2012, 950)
-		);
+
+//		List<Integer> batchIds = Lists.newArrayList(1,2,3);
+//
+//		System.out.println(batchIds.stream().map(t->Integer.toString(t)).collect(Collectors.joining(",")));
+
+		IntStream.rangeClosed(1, 3).boxed().collect(Collectors.toMap(k -> k, v -> null,(k,v)->v));
+
+
+
+
+
+
+
+//		Trader raoul = new Trader("Raoul", "Cambridge");
+//		Trader mario = new Trader("Mario", "Milan");
+//		Trader alan = new Trader("Alan", "Cambridge");
+//		Trader brian = new Trader("Brian", "Cambridge");
+//
+//		List<Transaction> transactions = Arrays.asList(
+//				new Transaction(brian, 2011, 300),
+//				new Transaction(raoul, 2012, 1000),
+//				new Transaction(raoul, 2011, 400),
+//				new Transaction(mario, 2012, 710),
+//				new Transaction(mario, 2012, 700),
+//				new Transaction(alan, 2012, 950)
+//		);
+//
+//		System.out.println(transactions.stream().filter(t -> t.getYear() == 2020).map(t -> t.getValue()).collect(Collectors.toList()));
+
 
 
 		//找出2011年发生的所有交易，并按交易额排序
@@ -243,14 +261,14 @@ public class LamdaTest {
 //        System.out.println(System.currentTimeMillis());
 
 
-		List<Integer> list = new ArrayList();
-		list.add(1);
-		list.add(2);
-		Integer i = list.stream().filter(ii -> ii.equals(3)).findFirst().orElseGet(() -> null);
-		if (i == null) {
-			System.out.println("异常");
-		}
-		System.out.println(i);
+//		List<Integer> list = new ArrayList();
+//		list.add(1);
+//		list.add(2);
+//		Integer i = list.stream().filter(ii -> ii.equals(3)).findFirst().orElseGet(() -> null);
+//		if (i == null) {
+//			System.out.println("异常");
+//		}
+//		System.out.println(i);
 
 
 	}
