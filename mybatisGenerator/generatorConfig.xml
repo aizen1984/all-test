@@ -20,19 +20,19 @@
         </commentGenerator>
 
 
-        <!--jdbc的数据库连接 -->
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.32.206:3306/loan"-->
-        <!--userId="root" password="root">-->
-        <!--</jdbcConnection>-->
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/loan"-->
-        <!--userId="root" password="">-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://106.15.59.97/test?characterEncoding=utf8"
-                        userId="root" password="123456">
+<!--        jdbc的数据库连接-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://cjjloan.db.ali-bj-sit01.shuheo.net:3306/lendengine"
+        userId="test" password="test">
         </jdbcConnection>
 
 
-        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+
+<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+<!--                        connectionURL="jdbc:mysql://106.15.59.97/test?characterEncoding=utf8"-->
+<!--                        userId="root" password="123456">-->
+<!--        </jdbcConnection>-->
+
+
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
@@ -41,7 +41,7 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径
         -->
-        <javaModelGenerator targetPackage="com.ethan.test.domain" targetProject="../src/main/java">
+        <javaModelGenerator targetPackage="cn.caijiajia.lendengine.lendfront.domain" targetProject="../src/main/java">
             <!-- 是否对model添加 构造函数 -->
             <property name="constructorBased" value="true"/>
 
@@ -58,7 +58,7 @@
         </javaModelGenerator>
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
-        <sqlMapGenerator targetPackage="com.ethan.test.mapper" targetProject="../src/main/resources">
+        <sqlMapGenerator targetPackage="cn.caijiajia.lendengine.lendfront.mapper" targetProject="../src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
@@ -68,7 +68,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator targetPackage="com.ethan.test.mapper" targetProject="../src/main/java"
+        <javaClientGenerator targetPackage="cn.caijiajia.lendengine.lendfront.mapper" targetProject="../src/main/java"
                              type="MIXEDMAPPER">
             <property name="enableSubPackages" value=""/>
             <!--
@@ -80,10 +80,8 @@
                     注意：如果 targetRuntime="MyBatis3",此参数被忽略
              -->
             <property name="exampleMethodVisibility" value=""/>
-            <!--
-              方法名计数器
-              Important note: this property is ignored if the target runtime is MyBatis3.
-             -->
+            <!--方法名计数器 Important note: this property is ignored if the target runtime is MyBatis3.
+            -->
             <property name="methodNameCalculator" value=""/>
 
             <!--为生成的接口添加父接口-->
@@ -92,7 +90,7 @@
         </javaClientGenerator>
         <!--<table tableName="bank_pipeline_process" delimitIdentifiers="true" delimitAllColumns="true"></table>-->
         <!--<table tableName="t_lend_trans" delimitIdentifiers="true"  delimitAllColumns="true"></table>-->
-        <table tableName="cas_f_lendengine_light_asset_data_from_loan_temp" delimitIdentifiers="true" delimitAllColumns="true"></table>
+        <table tableName="t_lend_apply" delimitIdentifiers="true" delimitAllColumns="true"></table>
         <!--<table tableName="channel_card" delimitIdentifiers="true" delimitAllColumns="true"></table>-->
         <!--<table tableName="credit_info" delimitIdentifiers="true" delimitAllColumns="true"></table>-->
         <!--<table tableName="deduct_detail" delimitIdentifiers="true" delimitAllColumns="true"></table>-->
