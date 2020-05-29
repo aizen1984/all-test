@@ -3,6 +3,7 @@ package com.caoc.test.lamda;
 
 import com.caoc.test.lamda.steam.Dish;
 import com.caoc.test.lamda.steam.Dish2;
+import lombok.Data;
 import org.springframework.util.StringUtils;
 import org.testng.collections.Lists;
 
@@ -26,7 +27,7 @@ public class LamdaTest {
 //
 //		System.out.println(batchIds.stream().map(t->Integer.toString(t)).collect(Collectors.joining(",")));
 
-		IntStream.rangeClosed(1, 3).boxed().collect(Collectors.toMap(k -> k, v -> null,(k,v)->v));
+//		IntStream.rangeClosed(1, 3).boxed().collect(Collectors.toMap(k -> k, v -> null,(k,v)->v));
 
 
 
@@ -270,7 +271,17 @@ public class LamdaTest {
 //		}
 //		System.out.println(i);
 
+		A a = new A();
+		Integer b  = 1;
+		b = b + a.getA();
+		System.out.println(b);
 
+
+	}
+
+	@Data
+	static class A{
+		private int a;
 	}
 
 	private static boolean prime(int position) {
