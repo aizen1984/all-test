@@ -8,12 +8,14 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan("com.caoc.test.spring.properties")
 @Configuration
 @PropertySource(value = "classpath:application.properties")
-public class PropertiesTest {
+public class PropertiesTest<T,R> {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
 		applicationContext.register(PropertiesTest.class);
 		applicationContext.refresh();
+
+		PropertiesTest.class.getGenericInterfaces();
 
 		EnablePropertiesConfiguration bean = applicationContext.getBean(EnablePropertiesConfiguration.class);
 		System.out.println(bean.getPropertiesCaoc());
