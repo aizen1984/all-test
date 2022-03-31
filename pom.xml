@@ -20,7 +20,7 @@
         <proect.build.sourceEncoding>UTF-8</proect.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <boot.version>2.0.1.RELEASE</boot.version>
+        <boot.version>2.5.12</boot.version>
     </properties>
 
     <dependencies>
